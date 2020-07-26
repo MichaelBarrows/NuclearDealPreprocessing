@@ -1,4 +1,5 @@
 dataset.py
 __pycache__
 helpers.pyc
-README.md
+.gitignore
+dataset.py.example
