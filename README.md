@@ -45,13 +45,14 @@ Copy `dataset.py.example` to `dataset.py`
     cp dataset.py.example dataset.py
 
 
-in `dataset.py`:
+<!-- sort this out -->
+<!-- in `dataset.py`:
 - Add the absolute path to the `dataset` variable (folder containing the dataset files)
   - e.g. `/home/USER/nuclear_deal_tweet_extraction/data/`
 - Add an absolute path to the `output_data` variable for storing output data
   - e.g. `/home/USER/nuclear_deal_tweet_extraction/output_data/`
 - For each of the dataset files listed, add the filenames (and folders if in folders beyond the absolute path)
-  - e.g. `2019_01/iran_2019_01_tweets_1.csv `
+  - e.g. `2019_01/iran_2019_01_tweets_1.csv ` -->
 
 <h3>Requirements</h3>
 <hr style="margin:10px 0;padding:0;"/>
@@ -62,4 +63,4 @@ The requirements for this code to run are detailed in `requirements.txt`.
 <hr style="margin:10px 0;padding:0;"/>
 
 - Within the Python virtual environment, run:
-`python run.py`
+`python preprocessing.py`
