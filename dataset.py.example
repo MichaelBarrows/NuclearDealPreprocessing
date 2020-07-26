@@ -5,7 +5,6 @@
 #   add the relative path (relative to "dataset" variable) for each of the files.
 #     example:
 #       dataset = "/home/user/iran_datasets"
-#       oct_18 = "18_10/iran_tweets_1.csv"
 
 # Path to datasets output from nuclear deal tweet extraction
 dataset = ""

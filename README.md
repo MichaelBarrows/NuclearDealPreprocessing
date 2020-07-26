@@ -28,7 +28,7 @@ This code is used to preprocess twitter data. This code will:
 **Note:** it is recommended that you create a virtual environment (the code was created for Python 3.6):
 
     mkvirtualenv --python=/usr/bin/python3.6 preprocessing
-#####    workon %venvname%
+    workon preprocessing
 
 
 To install the required dependencies:
@@ -44,15 +44,11 @@ Copy `dataset.py.example` to `dataset.py`
 
     cp dataset.py.example dataset.py
 
-
-<!-- sort this out -->
-<!-- in `dataset.py`:
-- Add the absolute path to the `dataset` variable (folder containing the dataset files)
+in `dataset.py`:
+- Add the absolute path to the `dataset` variable (folder containing the extracted nuclear deal dataset files)
   - e.g. `/home/USER/nuclear_deal_tweet_extraction/data/`
 - Add an absolute path to the `output_data` variable for storing output data
   - e.g. `/home/USER/nuclear_deal_tweet_extraction/output_data/`
-- For each of the dataset files listed, add the filenames (and folders if in folders beyond the absolute path)
-  - e.g. `2019_01/iran_2019_01_tweets_1.csv ` -->
 
 <h3>Requirements</h3>
 <hr style="margin:10px 0;padding:0;"/>

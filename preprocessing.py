@@ -3,8 +3,8 @@ import dataset as ds
 import unicodedata
 import contractions
 import re
-import emoji
 from nltk.corpus import stopwords
+import pandas as pd
 
 stop_words = set(stopwords.words('english'))
 
@@ -79,11 +79,11 @@ def transform_hashtags (text):
 #       list of words. Each word is checked to see if it is present in the list
 #       of URL's. If it is not present, it is added to a list which is then
 #       converted to a string and returned.
-def remove_urls (text, urls):
+def remove_urls (text):
     new_text = []
     text = text.split()
     for word in text:
-        if word not in urls:
+        if '//t.co' not in word:
             new_text.append(word)
     new_text = " ".join(new_text)
     return new_text
@@ -120,10 +120,13 @@ def remove_special_chars (text):
                           ['rt'],
                           ['&gt;', '\&gt;'],
                           ['&lt;', '\&lt;'],
-                          ['&', '\&']]
+                          ['&', '\&'],
+                          ['\n', '\\n'],
+                          ['$', '\$'],
+                          [':', ':']]
     for special_char in special_chars_list:
         if special_char[0] in text:
-            text = re.sub(special_char[-1], '', text)
+            text = re.sub(special_char[-1], ' ', text)
     return text
 
 # remove_stopwords
@@ -143,3 +146,29 @@ def remove_stopwords (text):
             new_text.append(word)
     new_text = " ".join(new_text)
     return new_text
+
+
+# load generic and specific datasets and merge them together
+dfs = []
+for df in ds.all_datasets:
+    dfs.append(helpers.load_dataset(ds.dataset + df))
+dfs = pd.concat(dfs, ignore_index=True)
+
+# loop over dataframe, perform preprocessing on the tweet text
+for index, row in dfs.iterrows():
+    tweet_text = row.tweet_text
+    tweet_text = lowercase_conversion(tweet_text)
+    tweet_text = remove_accents(tweet_text)
+    tweet_text = remove_usernames(tweet_text)
+    tweet_text = transform_hashtags(tweet_text)
+    tweet_text = remove_urls(tweet_text)
+    tweet_text = contraction_expansion(tweet_text)
+    tweet_text = remove_special_chars(tweet_text)
+    tweet_text = remove_stopwords(tweet_text)
+    dfs.tweet_text.at[index] = tweet_text
+
+# Store processed data
+helpers.dataframe_to_csv(dfs, ds.output_data + 'preprocessed_data.csv')
+
+# print complete message
+print('Preprocessing complete')
