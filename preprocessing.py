@@ -155,6 +155,7 @@ for df in ds.all_datasets:
 dfs = pd.concat(dfs, ignore_index=True)
 
 # loop over dataframe, perform preprocessing on the tweet text
+dfs['preprocessed_tweet_text'] = ""
 for index, row in dfs.iterrows():
     tweet_text = row.tweet_text
     tweet_text = lowercase_conversion(tweet_text)
@@ -165,7 +166,7 @@ for index, row in dfs.iterrows():
     tweet_text = contraction_expansion(tweet_text)
     tweet_text = remove_special_chars(tweet_text)
     tweet_text = remove_stopwords(tweet_text)
-    dfs.tweet_text.at[index] = tweet_text
+    dfs.preprocessed_tweet_text.at[index] = tweet_text
 
 # Store processed data
 helpers.dataframe_to_csv(dfs, ds.output_data + 'preprocessed_data.csv')
