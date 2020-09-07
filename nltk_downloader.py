@@ -1,4 +1,4 @@
-This file initiates the NLTK downloader dialog box
+#This file initiates the NLTK downloader dialog box
 
 import nltk
 nltk.download()

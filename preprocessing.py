@@ -82,8 +82,15 @@ def transform_hashtags (text):
 def remove_urls (text):
     new_text = []
     text = text.split()
+    in_word = False
     for word in text:
-        if '//t.co' not in word:
+        if 't.co' in word:
+            in_word = True
+        if 'http' in word:
+            in_word = True
+        if 'https' in word:
+            in_word == True
+        if in_word == False:
             new_text.append(word)
     new_text = " ".join(new_text)
     return new_text
@@ -159,10 +166,10 @@ dfs['preprocessed_tweet_text'] = ""
 for index, row in dfs.iterrows():
     tweet_text = row.tweet_text
     tweet_text = lowercase_conversion(tweet_text)
+    tweet_text = remove_urls(tweet_text)
     tweet_text = remove_accents(tweet_text)
     tweet_text = remove_usernames(tweet_text)
     tweet_text = transform_hashtags(tweet_text)
-    tweet_text = remove_urls(tweet_text)
     tweet_text = contraction_expansion(tweet_text)
     tweet_text = remove_special_chars(tweet_text)
     tweet_text = remove_stopwords(tweet_text)
