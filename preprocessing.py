@@ -177,6 +177,7 @@ for index, row in dfs.iterrows():
     tweet_text = contraction_expansion(tweet_text)
     tweet_text = remove_special_chars(tweet_text)
 
+    # sorts out multiple spaces
     tweet_text = tweet_text.split()
     tweet_text = " ".join(tweet_text)
 
