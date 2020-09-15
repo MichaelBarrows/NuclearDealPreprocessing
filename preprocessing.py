@@ -123,6 +123,11 @@ def remove_special_chars (text):
                           ['?', '\?'],
                           [','],
                           ['-'],
+                          ['_'],
+                          ['`'],
+                          ['|'],
+                          ['(', '\('],
+                          [')', '\)'],
                           ['&amp;', '\&amp;'],
                           ['rt'],
                           ['&gt;', '\&gt;'],
@@ -149,7 +154,7 @@ def remove_stopwords (text):
     text = text.split()
     new_text = []
     for word in text:
-        if word not in stop_words:
+        if word not in stop_words or word == "not":
             new_text.append(word)
     new_text = " ".join(new_text)
     return new_text
@@ -160,9 +165,8 @@ dfs = []
 for df in ds.all_datasets:
     dfs.append(helpers.load_dataset(ds.dataset + df))
 dfs = pd.concat(dfs, ignore_index=True)
-
-# loop over dataframe, perform preprocessing on the tweet text
 dfs['preprocessed_tweet_text'] = ""
+# loop over dataframe, perform preprocessing on the tweet text
 for index, row in dfs.iterrows():
     tweet_text = row.tweet_text
     tweet_text = lowercase_conversion(tweet_text)
@@ -172,7 +176,10 @@ for index, row in dfs.iterrows():
     tweet_text = transform_hashtags(tweet_text)
     tweet_text = contraction_expansion(tweet_text)
     tweet_text = remove_special_chars(tweet_text)
-    tweet_text = remove_stopwords(tweet_text)
+
+    tweet_text = tweet_text.split()
+    tweet_text = " ".join(tweet_text)
+
     dfs.preprocessed_tweet_text.at[index] = tweet_text
 
 # Store processed data
