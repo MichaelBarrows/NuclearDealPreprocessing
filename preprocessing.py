@@ -3,10 +3,8 @@ import dataset as ds
 import unicodedata
 import contractions
 import re
-from nltk.corpus import stopwords
 import pandas as pd
 
-stop_words = set(stopwords.words('english'))
 
 # lowercase_conversion()
 # parameters:
@@ -140,25 +138,6 @@ def remove_special_chars (text):
         if special_char[0] in text:
             text = re.sub(special_char[-1], ' ', text)
     return text
-
-# remove_stopwords
-# parameters:
-#   text : string - the text for which stopwords should be removed
-# returns:
-#   new_text : string - the text without stopwords
-# description:
-#   This function removes stopwords from text using NLTK's stopwords corpus.
-#       The remaining text is returned.
-def remove_stopwords (text):
-    global stop_words
-    text = text.split()
-    new_text = []
-    for word in text:
-        if word not in stop_words or word == "not":
-            new_text.append(word)
-    new_text = " ".join(new_text)
-    return new_text
-
 
 # load generic and specific datasets and merge them together
 dfs = []
