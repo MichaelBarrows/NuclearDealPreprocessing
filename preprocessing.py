@@ -127,13 +127,14 @@ def remove_special_chars (text):
                           ['(', '\('],
                           [')', '\)'],
                           ['&amp;', '\&amp;'],
-                          ['rt'],
+                          [' amp '],
                           ['&gt;', '\&gt;'],
                           ['&lt;', '\&lt;'],
                           ['&', '\&'],
                           ['\n', '\\n'],
                           ['$', '\$'],
-                          [':', ':']]
+                          [':', ':'],
+                          ['/']]
     for special_char in special_chars_list:
         if special_char[0] in text:
             text = re.sub(special_char[-1], ' ', text)
