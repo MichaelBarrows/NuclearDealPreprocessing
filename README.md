@@ -25,7 +25,7 @@ This code is used to preprocess twitter data. This code will:
 <h3>Prerequisites</h3>
 <hr style="margin:10px 0;padding:0;"/>
 
-**Note:** it is recommended that you create a virtual environment (the code was created for Python 3.6):
+**Note:** it is recommended that you create a virtual environment (this code was created for Python 3.6):
 
     mkvirtualenv --python=/usr/bin/python3.6 preprocessing
     workon preprocessing
